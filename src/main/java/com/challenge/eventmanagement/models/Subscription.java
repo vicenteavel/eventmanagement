@@ -1,5 +1,7 @@
 package com.challenge.eventmanagement.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,30 +10,42 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity(name="subscription")
-public class Subscription {
+public class Subscription implements Serializable {
    
-   @Id
+   /**
+	 *
+	 */
+	private static final long serialVersionUID = 5710490216364764875L;
+
+@Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private final long id;
+   private final Long id;
    
    @ManyToOne
    @JoinColumn
-   private final User user;
+   private User user;
 
    @ManyToOne
    @JoinColumn
-   private final Event event;
+   private Event event;
 
    private final boolean confirmed;
 
-   public Subscription(long id, User user, Event event) {
+   public Subscription() {
+      this.id = -1L;
+      this.user = null;
+      this.event = null;
+      this.confirmed = false;
+   }
+
+   public Subscription(Long id, User user, Event event) {
       this.id = id;
       this.user = user;
       this.event = event;
       this.confirmed = false;
    }
 
-   public long getId() {
+   public Long getId() {
       return id;
    }
 
@@ -45,6 +59,14 @@ public class Subscription {
 
    public boolean getConfirmed() {
       return confirmed;
+   }
+
+   public void setUser(User user) {
+      this.user = user;
+   }
+
+   public void setEvent(Event event) {
+      this.event = event;
    }
 
 }

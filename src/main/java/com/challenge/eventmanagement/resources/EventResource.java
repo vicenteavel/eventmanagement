@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EventResource {
    @JsonProperty
-   private final long id;
+   private final Long id;
 
    @JsonProperty
    private final String name;
 
    @JsonProperty
-   private final int vacancies;
+   private int vacancies;
 
    @JsonProperty
    private final LocalDateTime start;
@@ -20,7 +20,7 @@ public class EventResource {
    @JsonProperty
    private final LocalDateTime end;
 
-   public EventResource(long id, String name, int vacancies, LocalDateTime start, LocalDateTime end) {
+   public EventResource(Long id, String name, int vacancies, LocalDateTime start, LocalDateTime end) {
       this.id = id;
       this.name = name;
       this.vacancies = vacancies;
@@ -28,7 +28,7 @@ public class EventResource {
       this.end = end;
    }
 
-   public long getId() {
+   public Long getId() {
       return id;
    }
 
@@ -47,4 +47,7 @@ public class EventResource {
       return end;
    }
 
+   public void setVacancies(int vacancies) {
+      this.vacancies = vacancies;
+   }
 }

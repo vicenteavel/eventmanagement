@@ -1,5 +1,6 @@
 package com.challenge.eventmanagement.models;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -8,18 +9,31 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "event")
-public class Event {
+public class Event implements Serializable{
+
+   /**
+    *
+    */
+   private static final long serialVersionUID = 1927323140597932187L;
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private final long id;
+   private final Long id;
 
    private final String name;
-   private final int vacancies;
+   private int vacancies;
    private final LocalDateTime start;
    private final LocalDateTime end;
 
-   public Event(long id, String name, int vacancies, LocalDateTime start, LocalDateTime end) {
+   public Event() {
+      this.id = -1L;
+      this.name= "";
+      this.vacancies = 0;
+      this.start= null;
+      this.end = null;
+   }
+
+   public Event(Long id, String name, int vacancies, LocalDateTime start, LocalDateTime end) {
       this.id = id;
       this.name = name;
       this.vacancies = vacancies;
@@ -27,7 +41,7 @@ public class Event {
       this.end = end;
    }
 
-   public long getId() {
+   public Long getId() {
       return id;
    }
 
@@ -44,5 +58,13 @@ public class Event {
    }
    public LocalDateTime getEnd() {
       return end;
+   }
+
+   public void setVacancies(int vacancies) {
+      this.vacancies = vacancies;
+   }
+
+   public String toString() {
+      return "id: " + id + "  |  vacancies: " + vacancies + "  |  name: " + name + "\n";
    }
 }
