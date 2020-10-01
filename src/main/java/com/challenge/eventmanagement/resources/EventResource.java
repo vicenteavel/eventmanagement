@@ -1,25 +1,26 @@
-package com.challenge.eventmanagement.models;
+package com.challenge.eventmanagement.resources;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity(name = "event")
-public class Event {
-
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EventResource {
+   @JsonProperty
    private final long id;
 
+   @JsonProperty
    private final String name;
+
+   @JsonProperty
    private final int vacancies;
+
+   @JsonProperty
    private final LocalDateTime start;
+
+   @JsonProperty
    private final LocalDateTime end;
 
-   public Event(long id, String name, int vacancies, LocalDateTime start, LocalDateTime end) {
+   public EventResource(long id, String name, int vacancies, LocalDateTime start, LocalDateTime end) {
       this.id = id;
       this.name = name;
       this.vacancies = vacancies;
@@ -45,4 +46,5 @@ public class Event {
    public LocalDateTime getEnd() {
       return end;
    }
+
 }
