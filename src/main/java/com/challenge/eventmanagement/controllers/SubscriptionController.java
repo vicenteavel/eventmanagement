@@ -2,6 +2,7 @@ package com.challenge.eventmanagement.controllers;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import com.challenge.eventmanagement.models.Event;
 import com.challenge.eventmanagement.models.Subscription;
@@ -32,6 +33,14 @@ public class SubscriptionController {
    public Subscription create(@RequestBody Subscription subscription) {
       Long event_id = subscription.getEvent().getId();
       Long user_id = subscription.getUser().getId();
+
+      List<Subscription> allSubscriptions = subscriptionRepository.findAll();
+      
+      for(Subscription sub: allSubscriptions) {
+         if (sub.getUser().getId() == user_id && sub.getEvent().getId() == event_id) {
+            return null;
+         }
+      }
       
       Event currentEvent = eventRepository.findById(event_id).get();
       User currentUser = userRepository.findById(user_id).get();
@@ -57,7 +66,7 @@ public class SubscriptionController {
       return newSubscription;
    }
 
-   @PostMapping(path="/confirm/{id}")
+   @PostMapping(path="/subscriptions/{id}/confirm")
    public boolean confirm(@PathVariable (name="id", required = true) Long id) {
       Subscription subscription = subscriptionRepository.findById(id).get();
 
