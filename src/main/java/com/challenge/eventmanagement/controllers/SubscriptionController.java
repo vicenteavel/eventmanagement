@@ -1,6 +1,7 @@
 package com.challenge.eventmanagement.controllers;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import com.challenge.eventmanagement.models.Event;
 import com.challenge.eventmanagement.models.Subscription;
@@ -41,7 +42,7 @@ public class SubscriptionController {
       }
 
       LocalDateTime now = LocalDateTime.now();
-      if(currentEvent.getStart().isAfter(now)) {
+      if(currentEvent.getStart().isBefore(now)) {
          return null;
       }
 
@@ -53,6 +54,35 @@ public class SubscriptionController {
       Subscription newSubscription = subscriptionRepository.saveAndFlush(subscription);
 
       return newSubscription;
+   }
+
+   @PostMapping(path="/confirm/{id}")
+   public boolean confirm(@PathVariable (name="id", required = true) Long id) {
+      Subscription subscription = subscriptionRepository.findById(id).get();
+
+      Long event_id = subscription.getEvent().getId();
+      Long user_id = subscription.getUser().getId();
+      
+      Event currentEvent = eventRepository.findById(event_id).get();
+      User currentUser = userRepository.findById(user_id).get();
+
+      LocalDateTime now = LocalDateTime.now();
+      long minutesToStart = ChronoUnit.MINUTES.between(now, currentEvent.getStart());
+
+      if(minutesToStart > 60) {
+         return false;
+      }
+      
+      if(currentEvent.getEnd().isBefore(now)) { 
+         return false;
+      }
+
+      subscription.setEvent(currentEvent);
+      subscription.setUser(currentUser);
+      subscription.setConfirmed(true);
+      subscriptionRepository.save(subscription);
+
+      return true;
    }
 
    @DeleteMapping(path = "/subscriptions/{id}")
