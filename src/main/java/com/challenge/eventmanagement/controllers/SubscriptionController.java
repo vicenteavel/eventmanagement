@@ -51,6 +51,7 @@ public class SubscriptionController {
 
       subscription.setEvent(currentEvent);
       subscription.setUser(currentUser);
+      subscription.setConfirmed(false);
       Subscription newSubscription = subscriptionRepository.saveAndFlush(subscription);
 
       return newSubscription;

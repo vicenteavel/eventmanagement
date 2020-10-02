@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserResource {
    @JsonProperty
-   private final long id;
+   private final Long id;
 
    @JsonProperty
    private final String name;
 
-   public UserResource(long id, String name) {
+   public UserResource(Long id, String name) {
       this.id = id;
       this.name = name;
    }

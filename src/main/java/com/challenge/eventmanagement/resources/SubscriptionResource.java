@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SubscriptionResource {
    @JsonProperty
-   private final long id;
+   private final Long id;
 
    @JsonProperty
    private final User user;
@@ -15,9 +15,9 @@ public class SubscriptionResource {
    private final Event event;
    
    @JsonProperty
-   private final boolean confirmed;
+   private final Boolean confirmed;
 
-   public SubscriptionResource(long id, User user, Event event, boolean confirmed) {
+   public SubscriptionResource(Long id, User user, Event event, Boolean confirmed) {
       this.id = id;
       this.user = user;
       this.event = event;

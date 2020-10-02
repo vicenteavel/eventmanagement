@@ -27,7 +27,7 @@ public class Event implements Serializable{
 
    public Event() {
       this.id = -1L;
-      this.name= "";
+      this.name = "";
       this.vacancies = 0;
       this.start= null;
       this.end = null;
@@ -62,9 +62,5 @@ public class Event implements Serializable{
 
    public void setVacancies(int vacancies) {
       this.vacancies = vacancies;
-   }
-
-   public String toString() {
-      return "id: " + id + "  |  vacancies: " + vacancies + "  |  name: " + name + "\n";
    }
 }

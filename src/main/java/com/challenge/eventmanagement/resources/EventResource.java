@@ -12,7 +12,7 @@ public class EventResource {
    private final String name;
 
    @JsonProperty
-   private int vacancies;
+   private final int vacancies;
 
    @JsonProperty
    private final LocalDateTime start;
@@ -45,9 +45,5 @@ public class EventResource {
    }
    public LocalDateTime getEnd() {
       return end;
-   }
-
-   public void setVacancies(int vacancies) {
-      this.vacancies = vacancies;
    }
 }

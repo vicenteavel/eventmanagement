@@ -29,13 +29,13 @@ public class Subscription implements Serializable {
    @JoinColumn
    private Event event;
 
-   private boolean confirmed;
+   private Boolean confirmed;
 
    public Subscription() {
-      this.id = -1L;
+      this.id = null;
       this.user = null;
       this.event = null;
-      this.confirmed = false;
+      this.confirmed = null;
    }
 
    public Subscription(Long id, User user, Event event) {
@@ -57,7 +57,7 @@ public class Subscription implements Serializable {
       return event;
    }
 
-   public boolean getConfirmed() {
+   public Boolean getConfirmed() {
       return confirmed;
    }
 
@@ -69,7 +69,7 @@ public class Subscription implements Serializable {
       this.event = event;
    }
 
-   public void setConfirmed(boolean confirmed) {
+   public void setConfirmed(Boolean confirmed) {
       this.confirmed = confirmed;
    }
 
